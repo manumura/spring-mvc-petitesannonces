@@ -1,0 +1,143 @@
+html{
+	background-color: #2F2F2F;
+}
+
+body{
+	height: 100%;
+	background-color:rgb(245, 245, 245);
+}
+
+
+.main-container {
+	/*height: 720px; Without explicit px values, % in children's does not work*/
+	height: 100vh; /*with Viewport-Percentage, we can handles all devices screens  */
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+/* 	height: 100%; */
+	background-image: -webkit-gradient(
+		linear,
+		right bottom,
+		right top,
+		color-stop(0, #EDEDED),
+		color-stop(0.08, #EAEAEA),
+		color-stop(1, #2F2F2F),
+		color-stop(1, #AAAAAA)
+	);
+	background-image: -o-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+	background-image: -moz-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+	background-image: -webkit-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+	background-image: -ms-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+	background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+}
+
+.floatRight {
+	float: right;
+	margin-right: 18px;
+}
+
+.has-error {
+	color: red;
+}
+
+.generic-container {
+  position: fixed;
+  width: 80%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+}
+
+.custom-width {
+    width: 80px !important;
+}
+
+body, .main-container, .form-control{
+	font-size: 12px!important;
+}
+
+.login-container {
+    margin-top: 100px;
+    background-color: floralwhite;
+    width: 40%;
+    left: 30%;
+    position: absolute;
+}
+
+.login-card {
+    width: 80%;
+    margin: auto;
+}
+
+.login-form {
+    padding: 10%;
+}
+
+.authbar {
+	margin-bottom:15px;
+}
+
+/*tr:first-child {
+	font-weight: bold;
+	background-color: #C6C9C4;
+}*/
+
+/* Button to href */
+/*.inline {
+	display: inline;
+}
+
+.link-button {
+	background: none;
+	border: none;
+	color: #07C;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 1em;
+	font-family: serif;
+}
+
+.link-button:active, .link-button:hover {
+	color: #3af;
+	outline: none;
+}*/
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #ddd;
+}
+
+.error {
+	color: #a94442;
+/* 		border-color: #a94442; */
+/* 	  	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
+/* 	          	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
+}
+
+.has-success .form-control {
+	background-color: white;
+}
+
+div.accountConnection {
+	margin: 10px;
+	width: 600px;
+	background-color: #ffffff;
+	border: 1px solid #006600;
+}
+
+div.accountConnection h4 {
+	margin-top: 0;
+	background-color: #efefef;
+}
+
+div.accountConnection h4 img {
+	vertical-align: middle;
+}

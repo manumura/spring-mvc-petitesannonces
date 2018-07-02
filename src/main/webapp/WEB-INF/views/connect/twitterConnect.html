@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Connect to Twitter</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Home</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Connect to Twitter</h3>
+			
+			<form th:action="@{/social/connect/twitter}" method="POST">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+				<div class="formInfo">
+					<p>
+						You haven't created any connections with Twitter yet. Click the button to connect with your Twitter account. 
+						(You'll be redirected to Twitter where you'll be asked to authorize the connection.)
+					</p>
+				</div>
+				<p><button type="submit">Connect with your Twitter account</button></p>
+			</form>
+		</div>
+	</body>
+</html>

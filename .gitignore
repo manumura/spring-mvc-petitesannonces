@@ -1,0 +1,6 @@
+/target/
+/.tern-project
+/test-output/
+/.settings/
+/pom.xml.releaseBackup
+/release.properties

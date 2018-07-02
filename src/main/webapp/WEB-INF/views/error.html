@@ -1,0 +1,13 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Error</title>
+</head>
+<body>
+	<h1 th:text="#{message.error.title}"></h1>
+	<h2 th:text="#{message.error.message}"></h2>
+	<h2 th:if="${!#strings.isEmpty(message)}" th:text="${message}"></h2>
+	<div><a th:href="@{/logout}" th:text="#{message.authheader.user.logout}"></a></div>
+</body>
+</html>

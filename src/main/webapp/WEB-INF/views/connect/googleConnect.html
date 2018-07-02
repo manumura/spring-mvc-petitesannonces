@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Connect to Google</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Home</a></h1>
+		</div>
+		
+		<div id="content">
+			<h3>Connect to Google</h3>
+			
+			<form th:action="@{/social/connect/google}" method="POST">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+				<input type="hidden" name="scope" th:value="${googleScope}" />
+				<div class="formInfo">
+					<p>You aren't connected to Google yet. Click the button to connect with your Google account.</p>
+				</div>
+				<p><button type="submit">Connect to Google</button></p>
+			</form>
+		</div>		
+	</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title th:text="#{message.accessdenied.page.title}"></title>
+	<link th:href="@{/resources/css/bootstrap.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/style.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/font-awesome.css}" rel="stylesheet"></link> 
+</head>
+<body>
+	<div class="generic-container">
+		<div class="authbar">
+			<span th:text="#{message.accessdenied.user.message(${loggedInUser})}" style="font-weight: bold;"></span>
+			<span class="floatRight"><a th:href="@{/logout}" th:text="#{message.accessdenied.user.logout}"></a></span>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
+ 	<title th:text="#{message.login.page}"></title>
+ 	<script th:src="@{/resources/js/jquery-2.2.4.min.js}"></script>
+<!-- <script src="static/js/jquery-2.2.4.min.js"></script> -->
+	<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script th:src="@{/resources/js/formvalidator/jquery.form-validator.min.js}"></script>
+	<script th:src="@{/resources/js/custom-form-validation.js}"></script>
+ 	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/bootstrap-social.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/font-awesome.min.css}" rel="stylesheet" /> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    $(document).ready(function () {
+    	
+        // http://www.formvalidator.net
+     	// Setup form validation only on the form having id "userRegistrationForm"
+        $.validate({
+        	modules : 'toggleDisabled', 
+        	form : '#loginForm',
+        	lang : /*[[${locale}]]*/ 'en', 
+        	inputParentClassOnSuccess: '',
+        });
+		
+     	// Display proper bootstrap class on validated input element
+        $('input').on('blur', function(event) {
+			$(this).customValidationDisplay(event);
+		});
+        
+     	// Display proper bootstrap class on all input elements of the form
+		$('form#loginForm').submit(function(event) {
+			$(':submit').focus();
+			$("form#loginForm input").each(function() {
+				var input = $(this);
+				var type = input.attr('type');
+				if (type != 'submit' && type != 'button') {
+					input.customValidationDisplay(event);
+				}
+			});
+			// event.preventDefault(); // stop form submission
+		});
+		
+    });
+/*]]>*/
+</script>
+
+<body>
+ 	<div class="main-container"> 
+ 		<div class="login-container"> 
+ 			<div class="login-card"> 
+ 				<div class="login-form"> 
+ 					<form id="loginForm" th:action="@{/login/authenticate}" th:object="${loginModel}" method="POST" class="form-horizontal"> 
+						<div th:if="${errorMessages != null and !#lists.isEmpty(errorMessages)}" class="alert alert-danger">
+ 							<p th:each="errorMessage : ${errorMessages}" th:utext="${errorMessage}"></p> 
+ 						</div>
+ 						<div th:if="${!#strings.isEmpty(successMessage)}" class="alert alert-success"> 
+ 							<p th:text="${successMessage}"></p> 
+ 						</div> 
+ 						<div th:if="${param.expired != null}" class="alert alert-danger"> 
+ 							<p th:text="#{message.login.expired}"></p> 
+ 						</div> 
+ 						<div th:if="${param.error != null}" class="alert alert-danger"> 
+ 							<p th:text="#{message.login.error}"></p> 
+ 						</div> 
+ 						<div th:if="${param.logout != null}" class="alert alert-success"> 
+ 							<p th:text="#{message.logout.success}"></p> 
+ 						</div> 
+
+						<div class="form-group has-feedback input-sm">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon add-on"><i class="fa fa-user" aria-hidden="true"></i></span>
+									<input type="login" th:field="*{login}" id="login" name="login" 
+		 								class="form-control" th:placeholder="#{message.login.label.username}" 
+		 								maxlength="20" 
+										data-validation="required"
+										th:attr="data-validation-error-msg-required=#{error.message.user.login.not.empty}, 
+											data-validation-error-msg-length=#{error.message.user.login.size('', 20, 3)}"
+										data-validation-error-msg-container="#login-error-dialog" />
+								</div>
+<!-- 							TODO	data-validation-length="3-20" data-validation="required length" -->
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+								<span id="login-error-dialog" class="help-block with-errors"></span>
+								<span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="error"></span>
+							</div>
+						</div>
+
+						<div class="form-group has-feedback input-sm">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon add-on"><i class="fa fa-lock" aria-hidden="true"></i></span>
+									<input type="password" th:field="*{password}" id="password" name="password" 
+		 								class="form-control" th:placeholder="#{message.login.label.password}" 
+		 								maxlength="20" 
+		 								data-validation="required length" 
+										data-validation-length="8-20" 
+										th:attr="data-validation-error-msg-required=#{error.message.user.password.not.empty}, 
+											data-validation-error-msg-length=#{error.message.user.password.size('', 20, 8)}"
+										data-validation-error-msg-container="#password-error-dialog" />
+								</div>
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+								<span id="password-error-dialog" class="help-block with-errors"></span>
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></span>
+							</div>
+						</div>
+
+ 						<div class="form-actions input-sm"> 
+							<input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+							<input type="submit" id="loginFormSubmit" class="btn btn-block btn-primary btn-default" th:value="#{message.login.label.submit}" /> 
+ 						</div>
+<!-- 						<div class="form-group"> -->
+<!-- 							<button type="submit" class="btn btn-primary">Submit</button> -->
+<!-- 						</div> -->
+					</form> 
+ 				</div> 
+ 				
+ 				<div class="panel panel-default"> 
+ 					<div class="panel-body"> 
+ 						<a th:href="@{/auth/gmail}">Test email</a>
+ 					</div>
+ 				</div>
+ 				
+ 				<div class="panel panel-default" style="width: 100%; display: inline-block;"> 
+ 					<div class="panel-body" style="float: left;"> 
+ 						<a th:href="@{/register}" th:text="#{message.login.label.register}">Register</a> 
+ 					</div>
+ 					<div class="panel-body" style="float: right;"> 
+ 						<a th:href="@{/resetPassword}" th:text="#{message.label.forgot.password}">Forgot your password ?</a> 
+ 					</div>
+ 				</div>
+				
+ 				<div class="panel panel-default"> 
+ 					<div class="panel-body"> 
+ 						<p th:text="|#{message.login.label.sign.in.with}:|">Sign in with:</p> 
+
+ 						<div class="row social-button-row"> 
+ 							<div class="col-lg-4"> 
+ 								<a th:href="@{/auth/facebook}" class="ml btn btn-block btn-social btn-sm btn-facebook"><i class="fa fa-facebook"></i>Facebook</a> 
+ 							</div> 
+ 						</div> 
+						
+ 						<div class="row social-button-row"> 
+ 							<div class="col-lg-4"> 
+ 								<a th:href="@{/auth/twitter}" class="ml btn btn-block btn-social btn-sm btn-twitter"><i class="fa fa-twitter"></i>Twitter</a> 
+ 							</div> 
+ 						</div> 
+ 						
+ 						<div class="row social-button-row"> 
+ 							<div class="col-lg-4"> 
+ 								<a th:href="@{/auth/google}" class="ml btn btn-block btn-social btn-sm btn-google"><i class="fa fa-google"></i>Google</a> 
+ 							</div> 
+ 						</div> 
+ 					</div> 
+ 				</div> 
+ 			</div> 
+ 		</div> 
+ 	</div> 
+</body>
+</html>

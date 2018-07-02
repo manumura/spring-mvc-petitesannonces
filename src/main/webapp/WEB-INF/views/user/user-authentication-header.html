@@ -1,0 +1,10 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+  	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+	<div class="authbar" layout:fragment="user-authentication-header(loggedInUser)">
+		<span th:text="#{message.authheader.user.title}"></span><span style="font-weight: bold;" th:text="${loggedInUser}"></span>
+		<span class="floatRight"><a th:href="@{/logout}" th:text="#{message.authheader.user.logout}"></a></span>
+	</div>
+</body>
+</html>

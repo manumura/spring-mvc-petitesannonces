@@ -1,0 +1,22 @@
+https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+https://www.owasp.org/index.php/DOM_based_XSS_Prevention_Cheat_Sheet
+https://www.javadoc.io/doc/org.owasp.esapi/esapi/2.1.0.1
+https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35
+TU H2 file (driver H2) : jdbc:h2:file:C:/Users/emmanuel.mura/TU;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE (sa / sa)
+
+
+
+register : password conditions
+
+register : button submit disabled with recaptcha 
+https://www.bountysource.com/issues/45951270-captcha-does-not-complete-validation-unless-any-other-form-field-is-clicked
+
+path segment constantes
+
+path secure / allowed
+
+update user last action
+
+recherche
+
+TU

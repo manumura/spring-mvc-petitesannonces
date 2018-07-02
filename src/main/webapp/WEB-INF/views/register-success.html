@@ -1,0 +1,16 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title th:text="#{message.user.registration.success.page.title}"></title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+<body>
+	<div class="generic-container">
+		<div class="alert alert-success lead" th:text="${success}"></div>
+		<span class="well floatRight"><a th:text="#{message.go.to(#{message.user.list.label})}" th:href="@{/admin/list}"></a></span>
+	</div>
+</body>
+
+</html>

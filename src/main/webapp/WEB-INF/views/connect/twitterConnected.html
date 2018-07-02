@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Connected to Twitter</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Home</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Connected to Twitter</h3>
+			
+			<form id="disconnect" method="post">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+				<div class="formInfo">
+					<p>You are already connected to your Twitter account.
+						Click the button if you wish to disconnect.</p>
+				</div>
+			
+				<button type="submit">Disconnect</button>	
+				<input type="hidden" name="_method" value="delete" />
+			</form>
+			
+			<p><a th:href="@{/twitter}">View your Twitter profile</a></p>
+		</div>
+	</body>
+</html>

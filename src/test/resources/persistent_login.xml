@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<PERSISTENT_LOGIN SERIES="1" USERNAME="manu" TOKEN="token1" LAST_USED="2016-08-08 14:36:45" />
+	<PERSISTENT_LOGIN SERIES="2" USERNAME="johnny" TOKEN="token2" LAST_USED="2015-02-01 00:00:45" />
+</dataset>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		<copy-by-references>
+	        <copy-by-reference>
+	            org.joda.time.LocalDate
+	        </copy-by-reference>
+	        <copy-by-reference>
+	            org.joda.time.LocalDateTime
+	        </copy-by-reference>
+	    </copy-by-references>
+	</configuration>
+	
+	<mapping>
+		<class-a>fr.manu.petitesannonces.dto.User</class-a>
+		<class-b>fr.manu.petitesannonces.persistence.entities.UserEntity</class-b>
+		<field>
+			<a>userRoles</a>
+			<b>userRoles</b>
+			<a-hint>fr.manu.petitesannonces.dto.UserRole</a-hint>
+   	 		<b-hint>fr.manu.petitesannonces.persistence.entities.UserRoleEntity</b-hint> 
+		</field>
+	</mapping>
+    
+    <mapping>
+		<class-a>fr.manu.petitesannonces.dto.UserRole</class-a>
+		<class-b>fr.manu.petitesannonces.persistence.entities.UserRoleEntity</class-b>
+	</mapping>
+	
+	<mapping>
+		<class-a>fr.manu.petitesannonces.dto.VerificationToken</class-a>
+		<class-b>fr.manu.petitesannonces.persistence.entities.VerificationTokenEntity</class-b>
+		<field>
+			<a>user</a>
+			<b>user</b>
+			<a-hint>fr.manu.petitesannonces.dto.User</a-hint>
+   	 		<b-hint>fr.manu.petitesannonces.persistence.entities.UserEntity</b-hint> 
+		</field>
+	</mapping>
+    
+<!-- 	<mapping> -->
+<!-- 		<class-a>fr.manu.petitesannonces.persistence.entities.PersistentLoginEntity</class-a> -->
+<!-- 		<class-b>org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken</class-b> -->
+<!-- 		<field> -->
+<!-- 			<a>token</a> -->
+<!-- 			<b>tokenValue</b> -->
+<!-- 		</field> -->
+<!-- 		<field> -->
+<!-- 			<a>lastUsed</a> -->
+<!-- 			<b>date</b> -->
+<!-- 		</field> -->
+<!-- 	</mapping> -->
+
+</mappings> 

@@ -1,0 +1,240 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
+ 	<title th:text="#{message.edit.page.title}">User Edit Form</title>
+ 	<script th:src="@{/resources/js/jquery-2.2.4.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script th:src="@{/resources/js/formvalidator/jquery.form-validator.min.js}"></script>
+	<script th:src="@{/resources/js/moment-with-locales.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap-datetimepicker.min.js}"></script>
+	<script th:src="@{/resources/js/custom-form-validation.js}"></script>
+ 	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+	<link th:href="@{/resources/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link>
+</head>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    $(document).ready(function () {
+		
+		// https://eonasdan.github.io/bootstrap-datetimepicker/
+    	$('#dateNaissancePicker').datetimepicker({
+    		minDate: "01/01/1900",
+    	    maxDate: "01/01/2100",
+    		format: 'DD/MM/YYYY',
+    		allowInputToggle: true,
+    		locale : /*[[${locale}]]*/ 'en'
+        });
+    	
+        // http://www.formvalidator.net
+     	// Setup form validation only on the form having id "userEditForm"
+        $.validate({
+        	modules : 'date, security', 
+        	form : '#userEditForm',
+        	lang : /*[[${locale}]]*/ 'en',
+        	inputParentClassOnSuccess: ''
+        }); //toggleDisabled
+
+		// Display proper bootstrap class on validated input element
+        $('input').on('blur', function(event) {
+			$(this).customValidationDisplay(event);
+		});
+
+        // Display proper bootstrap class on all input elements of the form on submit
+        $('form#userEditForm').submit(function(event) {
+        	$(':submit').focus();
+        	$("form#userEditForm input").displayFormValidation();
+		});
+
+        // Validate on startup
+//         $("form#userEditForm input").each(function() {
+// 			var input = $(this);
+// 			var type = input.attr('type');
+// 			if (type != 'submit' && type != 'button') {
+// 				console.log(input);
+// 				input.validate(function(valid, elem) {
+// 		   			console.log('Element '+elem.name+' is '+( valid ? 'valid' : 'invalid'));
+// 				});
+// 			}
+// 		});
+    });
+/*]]>*/
+</script>
+	
+<body>
+
+	<div class="container">
+
+	<h2 th:text="#{message.edit.form.title}">Edit Form</h2>
+	
+	<form id="userEditForm" th:with="actionUrl=(${#bools.isTrue(adminEdit) && !#strings.isEmpty(login)} ? ${#strings.concat('/admin/edit/', login)} : '/user/edit')" 
+		th:action="@{${actionUrl}}" th:object="${userModel}" method="POST" class="form-horizontal">
+
+<!-- 			<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}"> -->
+<!-- 				<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p> -->
+<!-- 			</div> -->
+
+		<div class="form-group">
+			<label for="login" class="control-label col-sm-3" th:text="|#{message.register.input.login}:|">Login: </label>
+			<div class="col-sm-9">
+				<label id="login" class="control-label" th:text="${loggedInUser}" />
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="email" class="control-label col-sm-3" th:text="|* #{message.register.input.email}:|">* Email: </label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<span class="input-group-addon">@</span>
+					<input type="email" th:field="*{email}" id="email"
+						class="form-control" 
+						maxlength="254"
+						data-validation="required email" 
+						th:attr="data-validation-error-msg-required=#{error.message.user.email.not.empty}, 
+							data-validation-error-msg-email=#{error.message.user.email.incorrect}"
+						data-validation-error-msg-container="#email-error-dialog" />
+				</div>
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span id="email-error-dialog" class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+			</div>
+		</div>
+		
+		<div class="form-group has-feedback">
+			<label for="confirmEmail" class="control-label col-sm-3" th:text="|* #{message.register.input.confirm.email}:|">* Confirm email: </label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<span class="input-group-addon">@</span>
+					<input type="email" th:field="*{confirmEmail}" id="confirmEmail"
+						class="form-control" 
+						maxlength="254"
+						data-validation="required email confirmation" 
+						data-validation-confirm="email"
+						th:attr="data-validation-error-msg-required=#{error.message.user.confirm.email.not.empty}, 
+							data-validation-error-msg-email=#{error.message.user.confirm.email.incorrect}, 
+							data-validation-error-msg-confirmation=#{error.message.user.email.confirmation}"
+						data-validation-error-msg-container="#confirm-email-error-dialog" />
+				</div>
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span id="confirm-email-error-dialog" class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="prenom" class="control-label col-sm-3" th:text="|* #{message.register.input.firstname}:|">* First Name: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{prenom}" id="prenom"
+					class="form-control" placeholder="First name" 
+					maxlength="50" 
+					data-validation="required" 
+					th:attr="data-validation-error-msg-required=#{error.message.user.prenom.not.empty}" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="nom" class="control-label col-sm-3" th:text="|* #{message.register.input.lastname}:|">* Last Name: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{nom}" id="nom" class="form-control"
+					placeholder="Last name" 
+					maxlength="50" 
+					data-validation="required" 
+					th:attr="data-validation-error-msg-required=#{error.message.user.nom.not.empty}" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="dateNaissance" class="control-label col-sm-3" th:text="|#{message.register.input.birthdate}:|">Birthdate: </label>
+			<div class="col-sm-9">
+				<div class="input-group date" id="dateNaissancePicker">
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+					<input type="text" th:field="*{dateNaissance}" id="dateNaissance"
+						class="form-control" placeholder="Birthdate" 
+						data-validation-optional="true"
+						data-validation="date" 
+						data-validation-require-leading-zero="false"
+						data-validation-format="dd/mm/yyyy"
+						th:attr="data-validation-error-msg-date=#{error.message.user.date.naissance.incorrect}"
+						data-validation-error-msg-container="#dateNaissance-error-dialog" />
+<!-- 						data-validation-error-msg-required=#{error.message.user.date.naissance.not.empty} -->
+				</div>
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span id="dateNaissance-error-dialog" class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('dateNaissance')}" th:errors="*{dateNaissance}" class="error"></span>
+			</div>
+		</div>
+		
+		<div class="form-group has-feedback">
+			<label for="adressePrincipal" class="control-label col-sm-3" th:text="|#{message.register.input.address}:|">Address: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{adressePrincipal}"
+					id="adressePrincipal" class="form-control" 
+					placeholder="Address" maxlength="60" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('adressePrincipal')}" th:errors="*{adressePrincipal}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="adresseDetail" class="control-label col-sm-3" th:text="|#{message.register.input.address.details}:|">Address details: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{adresseDetail}" id="adresseDetail"
+					class="form-control" 
+					placeholder="Address details" maxlength="80" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('adresseDetail')}" th:errors="*{adresseDetail}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="codePostal" class="control-label col-sm-3" th:text="|#{message.register.input.zip.code}:|">Zip code: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{codePostal}" id="codePostal"
+					class="form-control" placeholder="Zip code"
+					maxlength="5" 
+					data-validation-optional="true"
+					data-validation="length number"
+					data-validation-length="5-5" 
+					th:attr="data-validation-error-msg-length=#{error.message.user.code.postal.size('', 5)}, 
+						data-validation-error-msg-number=#{error.message.user.code.postal.incorrect}" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback">
+			<label for="ville" class="control-label col-sm-3" th:text="|#{message.register.input.city}:|">City: </label>
+			<div class="col-sm-9">
+				<input type="text" th:field="*{ville}" id="ville"
+					class="form-control" placeholder="City"
+					maxlength="50" />
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+				<span class="help-block with-errors"></span>
+				<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}" class="error"></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button type="submit" class="btn btn-primary" th:text="Update"></button>
+			</div>
+		</div>
+	</form>
+	
+	<br/>
+	<a th:href="@{/admin/list}" th:text="#{message.user.list.page.title}" />
+	</div>
+</body>
+</html>

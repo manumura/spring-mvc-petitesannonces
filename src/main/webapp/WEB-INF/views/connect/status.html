@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title th:text="#{message.user.registration.success.page.title}"></title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link> 
+ 	<link th:href="@{/resources/css/custom-style.css}" rel="stylesheet"></link> 
+</head>
+
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Home</a></h1>
+		</div>
+		
+		<div class="main-container">
+			<h3>Your Connections</h3>
+			
+			<div class="accountConnection" th:each="providerId : ${providerIds}">
+<!-- 				<img th:src="@{#{${providerId} + '.icon'}}" width="36" height="36" /> -->
+				<h4><span th:text="#{${providerId} + '.displayName'}">provider name</span></h4>
+				<p>
+ 				<span th:if="${!#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span> as <span style="color:red;" th:text="${connectionMap[__${providerId}__][0].displayName}">user display name</span>.
+				</span>
+				<span th:if="${#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are not yet connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span>.
+				</span>
+				Click <a th:href="@{'/social/connect/' + ${providerId}}">here</a> to manage your <span th:text="#{${providerId} + '.displayName'}">provider name</span> connection.
+				</p>
+ 			</div>
+		</div>
+	</body>
+</html>

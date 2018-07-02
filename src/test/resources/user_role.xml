@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<USER_ROLE USER_ROLE_ID="1" USER_ROLE_TYPE="TYPE1" />
+	<USER_ROLE USER_ROLE_ID="2" USER_ROLE_TYPE="TYPE2" />
+</dataset>
