@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/manumura/spring-mvc-petitesannonces.svg?style=svg)](https://circleci.com/gh/manumura/spring-mvc-petitesannonces)
+
 # README petitesannonces #
 
 This README would normally document whatever steps are necessary to get your application up and running.
