@@ -95,14 +95,12 @@
 	<!-- https://bitbucket.org/mbarcikowski/howto-maven-release-git-ssh/src -->
 	<!-- http://superuser.com/questions/378354/connecting-to-github-using-putty-generated-ssh-key-in-windows-7 -->
 	<!-- https://eclipseguru.github.io/eclipse-jsch-agent-proxy/ -->
-	<scm>
-		<connection>scm:git:https://manumura@bitbucket.org/manumura/petitesannonces.git</connection>
-		<developerConnection>scm:git:https://manumura@bitbucket.org/manumura/petitesannonces.git</developerConnection>
-		<url>https://manumura@bitbucket.org/manumura/petitesannonces/src</url>
-		<!-- https://manumura@bitbucket.org/manumura/petitesannonces.git -->
-		<!-- ssh://git@bitbucket.org/manumura/petitesannonces.git -->
-		<tag>HEAD</tag>
-	</scm>
+	<!--<scm>-->
+		<!--<connection>scm:git:https://manumura@bitbucket.org/manumura/petitesannonces.git</connection>-->
+		<!--<developerConnection>scm:git:https://manumura@bitbucket.org/manumura/petitesannonces.git</developerConnection>-->
+		<!--<url>https://manumura@bitbucket.org/manumura/petitesannonces/src</url>-->
+		<!--<tag>HEAD</tag>-->
+	<!--</scm>-->
 
 	<dependencies>
 
@@ -155,10 +153,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.4</version>
 		</dependency>
-
-
-
-
 
 		<!-- Spring -->
 		<dependency>
@@ -583,7 +577,7 @@
         <outputDirectory>${project.build.directory}/classes</outputDirectory>
         <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
         <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-        <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+        <!--<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>-->
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
