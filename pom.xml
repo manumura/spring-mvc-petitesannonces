@@ -10,7 +10,7 @@
 	<description>Petites Annonces</description>
 
 	<properties>
-		<springframework.version>5.0.4.RELEASE</springframework.version><!-- 4.3.14.RELEASE -->
+		<springframework.version>5.0.7.RELEASE</springframework.version><!-- 4.3.14.RELEASE -->
 		<spring.security.version>5.0.3.RELEASE</spring.security.version><!-- 4.2.4.RELEASE -->
 		<spring.data.jpa.version>2.0.5.RELEASE</spring.data.jpa.version><!-- 1.11.9.RELEASE -->
 		<hibernate.version>5.2.15.Final</hibernate.version><!-- 4.3.11.Final -->
@@ -151,7 +151,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.4</version>
+			<version>2.9.8</version>
 		</dependency>
 
 		<!-- Spring -->
