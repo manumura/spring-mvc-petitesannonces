@@ -20,14 +20,9 @@ public class Converter {
 	/** Moteur de mapping */
 	private DozerBeanMapper mapper;
 	
-	/** Nom du fichier applicatif chargé */
+	/** Nom du fichier applicatif */
     private static final String APPLICATION_MAPPING = "app-mappings.xml";
 
-	/**
-	 * Récupère l'instance dozer
-	 * 
-	 * @return DozerBeanMapper
-	 */
 	private DozerBeanMapper getMapper() {
 
 		// chargement de la configuration via Dozer

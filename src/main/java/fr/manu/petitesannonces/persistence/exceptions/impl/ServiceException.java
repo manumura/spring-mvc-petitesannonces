@@ -10,7 +10,6 @@ public class ServiceException extends TechnicalException {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 6600948062826145550L;
 
-	/** Constructeur par défaut */
 	public ServiceException() {
 		super();
 	}

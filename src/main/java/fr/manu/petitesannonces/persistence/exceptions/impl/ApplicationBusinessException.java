@@ -11,7 +11,6 @@ public class ApplicationBusinessException extends BusinessException {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -7496492316942772450L;
 	
-	/** Constructeur par défaut */
 	public ApplicationBusinessException() {
 		super();
 	}

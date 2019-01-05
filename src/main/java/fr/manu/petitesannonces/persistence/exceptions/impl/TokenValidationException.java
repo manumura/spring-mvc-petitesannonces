@@ -12,7 +12,6 @@ public class TokenValidationException extends BusinessException {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -7496492316942772450L;
 	
-	/** Constructeur par défaut */
 	public TokenValidationException() {
 		super();
 	}

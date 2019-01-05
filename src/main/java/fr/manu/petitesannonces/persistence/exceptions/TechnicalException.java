@@ -3,19 +3,11 @@
  */
 package fr.manu.petitesannonces.persistence.exceptions;
 
-/**
- * Classe d'exception permettant de véhiculer des erreurs techniques.
- * <p>
- * Nota : Il est nécessaire de surclasser cette exception avec une adaptation
- * dédiée à un contexte d'erreur particulier.
- * </p>
- */
 public abstract class TechnicalException extends Exception implements SerializableCause {
 
     /** serialVersionUID */
     private static final long serialVersionUID = -7717192682422480242L;
 
-    /** Constructeur par défaut */
     public TechnicalException() {
         super();
     }

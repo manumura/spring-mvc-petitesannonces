@@ -13,7 +13,6 @@ public class RecaptchaServiceException extends TechnicalException {
 
 	private static final long serialVersionUID = -1347935575312298856L;
 
-	/** Constructeur par défaut */
 	public RecaptchaServiceException() {
 		super();
 	}
